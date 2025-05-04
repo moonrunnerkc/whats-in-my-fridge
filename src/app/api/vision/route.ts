@@ -47,11 +47,11 @@ No commentary. No markdown. No extra text.
     const cleaned = raw.trim().replace(/^```json\n/, '').replace(/```$/, '')
     return NextResponse.json({ ingredients: JSON.parse(cleaned) })
   } catch {
-  console.error('GPT Raw Output:', raw)
-  return NextResponse.json({
-    error: 'Could not parse image output',
-    raw, // <-- this is key for debugging
-  }, { status: 500 })
+    console.error('GPT Raw Output:', raw)
+    return NextResponse.json({
+      error: 'Could not parse image output',
+      raw
+    }, { status: 500 })
+  }
 }
-
 
