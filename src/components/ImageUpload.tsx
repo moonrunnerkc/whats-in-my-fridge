@@ -36,7 +36,7 @@ export function ImageUpload({ onExtract }: { onExtract: (ingredients: string[]) 
     } finally {
       setLoading(false)
     }
-  }
+  };
 
   return (
     <div className="space-y-2">
