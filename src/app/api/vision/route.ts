@@ -20,7 +20,18 @@ export async function POST(req: NextRequest) {
       {
         role: 'user',
         content: [
-          { type: 'text', text: 'List all visible food ingredients in this fridge or pantry photo. Return only a JSON array of strings.' },
+          {
+  type: 'text',
+  text: `
+Extract a list of visible food ingredients in this image.
+
+⚠️ IMPORTANT: Return ONLY this format:
+
+["item1", "item2", "item3"]
+
+NO explanations. NO markdown. Just valid JSON array.
+`.trim()
+}
           {
             type: 'image_url',
             image_url: { url: `data:${file.type};base64,${base64}` },
@@ -38,5 +49,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ingredients })
   } catch {
     return NextResponse.json({ error: 'Could not parse image output', raw }, { status: 500 })
+})
   }
 }
