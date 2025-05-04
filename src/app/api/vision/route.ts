@@ -13,31 +13,28 @@ export async function POST(req: NextRequest) {
 
   const buffer = Buffer.from(await file.arrayBuffer())
   const base64 = buffer.toString('base64')
+  const cleaned = raw.trim().replace(/^```json\n/, '').replace(/```$/, '');
+  const ingredients = JSON.parse(cleaned);
 
   const response = await openai.chat.completions.create({
-    model: 'gpt-4-turbo',
+    model: 'gpt-4o',
     messages: [
-      {
+    {
         role: 'user',
         content: [
-          {
+        {
             type: 'text',
-            text: `
-Extract a list of visible food ingredients in this image.
-
-⚠️ IMPORTANT: Return ONLY this format:
-
-["item1", "item2", "item3"]
-
-NO explanations. NO markdown. Just valid JSON array.
-            `.trim()
-          },
-          {
+            text: 'Describe the contents of this image.'
+        },
+        {
             type: 'image_url',
-            image_url: { url: `data:${file.type};base64,${base64}` },
-          }
-        ]
+            image_url: {
+            url: `data:${file.type};base64,${base64}`
+        }
       }
+    ]
+  }
+
     ],
     max_tokens: 300,
   })
