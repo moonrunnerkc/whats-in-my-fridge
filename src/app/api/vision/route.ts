@@ -42,12 +42,12 @@ export async function POST(req: NextRequest) {
   const raw = response.choices[0].message.content || ''
 
   try {
-  const cleaned = raw.trim().replace(/^```json\n/, '').replace(/```$/, '');
-  const ingredients = JSON.parse(cleaned);
-  return NextResponse.json({ ingredients });
+  const cleaned = raw.trim().replace(/^```json\n/, '').replace(/```$/, '')
+  return NextResponse.json({ ingredients: JSON.parse(cleaned) })
 } catch {
-  console.error('GPT Raw Output:', raw);
-  return NextResponse.json({ error: 'Could not parse image output', raw }, { status: 500 });
+  console.error('GPT Raw Output:', raw)
+  return NextResponse.json({ error: 'Could not parse image output', raw }, { status: 500 })
 }
+
 
 }
