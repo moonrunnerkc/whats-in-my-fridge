@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   const base64 = buffer.toString('base64')
 
   const response = await openai.chat.completions.create({
-    model: 'gpt-4-vision-preview',
+    model: 'gpt-4-turbo',
     messages: [
       {
         role: 'user',
@@ -48,6 +48,8 @@ NO explanations. NO markdown. Just valid JSON array.
     const ingredients = JSON.parse(raw)
     return NextResponse.json({ ingredients })
   } catch {
-    return NextResponse.json({ error: 'Could not parse image output', raw }, { status: 500 })
-  }
+  console.error('GPT Raw Output:', raw)
+  return NextResponse.json({ error: 'Could not parse image output', raw }, { status: 500 })
+}
+
 }
