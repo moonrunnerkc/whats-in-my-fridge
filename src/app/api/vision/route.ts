@@ -21,8 +21,8 @@ export async function POST(req: NextRequest) {
         role: 'user',
         content: [
           {
-  type: 'text',
-  text: `
+            type: 'text',
+            text: `
 Extract a list of visible food ingredients in this image.
 
 ⚠️ IMPORTANT: Return ONLY this format:
@@ -30,14 +30,14 @@ Extract a list of visible food ingredients in this image.
 ["item1", "item2", "item3"]
 
 NO explanations. NO markdown. Just valid JSON array.
-`.trim()
-}
+            `.trim()
+          },
           {
             type: 'image_url',
             image_url: { url: `data:${file.type};base64,${base64}` },
-          },
-        ],
-      },
+          }
+        ]
+      }
     ],
     max_tokens: 300,
   })
@@ -49,6 +49,5 @@ NO explanations. NO markdown. Just valid JSON array.
     return NextResponse.json({ ingredients })
   } catch {
     return NextResponse.json({ error: 'Could not parse image output', raw }, { status: 500 })
-})
   }
 }
