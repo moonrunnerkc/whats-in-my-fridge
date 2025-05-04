@@ -40,11 +40,8 @@ export default function Home() {
       if (!res.ok) throw new Error(json.error || 'Unknown error')
       setData(json)
     } catch (err) {
-  if (err instanceof Error) setError(err.message)
-  else setError('Unexpected error');
-}
-
-      setError(err.message)
+      if (err instanceof Error) setError(err.message)
+      else setError('Unexpected error');
     } finally {
       setLoading(false)
     }
