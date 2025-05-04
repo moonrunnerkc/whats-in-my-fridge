@@ -41,7 +41,7 @@ export default function Home() {
       setData(json)
     } catch (err) {
   if (err instanceof Error) setError(err.message)
-  else setError('Unexpected error')
+  else setError('Unexpected error');
 }
 
       setError(err.message)
