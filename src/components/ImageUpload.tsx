@@ -28,15 +28,12 @@ export function ImageUpload({ onExtract }: { onExtract: (ingredients: string[]) 
 
       onExtract(json.ingredients)
     } catch (err) {
-  if (err instanceof Error) setError(err.message)
-  else setError('Unexpected error')
-}
-
-      setError(err.message)
+      if (err instanceof Error) setError(err.message)
+      else setError('Unexpected error');
     } finally {
       setLoading(false)
     }
-  };
+  }
 
   return (
     <div className="space-y-2">
