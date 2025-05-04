@@ -27,7 +27,11 @@ export function ImageUpload({ onExtract }: { onExtract: (ingredients: string[]) 
       if (!res.ok) throw new Error(json.error || 'Vision API error')
 
       onExtract(json.ingredients)
-    } catch (err: any) {
+    } catch (err) {
+  if (err instanceof Error) setError(err.message)
+  else setError('Unexpected error')
+}
+
       setError(err.message)
     } finally {
       setLoading(false)

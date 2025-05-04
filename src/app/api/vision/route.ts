@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
   try {
     const ingredients = JSON.parse(raw)
     return NextResponse.json({ ingredients })
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Could not parse image output', raw }, { status: 500 })
   }
 }

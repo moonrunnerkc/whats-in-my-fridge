@@ -39,7 +39,11 @@ export default function Home() {
       const json = await res.json()
       if (!res.ok) throw new Error(json.error || 'Unknown error')
       setData(json)
-    } catch (err: any) {
+    } catch (err) {
+  if (err instanceof Error) setError(err.message)
+  else setError('Unexpected error')
+}
+
       setError(err.message)
     } finally {
       setLoading(false)

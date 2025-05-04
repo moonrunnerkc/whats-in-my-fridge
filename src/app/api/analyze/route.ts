@@ -38,7 +38,7 @@ Only return valid JSON.
   try {
     const data = JSON.parse(raw!)
     return NextResponse.json(data)
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Invalid GPT response', raw }, { status: 500 })
   }
 }
